@@ -194,7 +194,7 @@ public class SistemaLocadora {
                 editarVeiculo(scanner, gerenciadorVeiculos, gerenciadorCategorias);
                 break;
             case 4:
-                listarVeiculos(scanner, gerenciadorVeiculos);
+                listarVeiculosDisponiveis(scanner, gerenciadorLocacoes, gerenciadorVeiculos);
                 break;
             case 5:
                 System.out.println("Voltando ao Menu Principal.");
@@ -317,10 +317,9 @@ public class SistemaLocadora {
     }
 
     // Método para listar veículos
-    private static void listarVeiculos(Scanner scanner, ListaVeiculos gerenciadorVeiculos) {
-        System.out.println("---- Listar Veículos ----");
-        System.out.println("1. Listar Veículos do Início ao Fim");
-        System.out.println("2. Listar Veículos do Fim ao Início");
+    private static void listarVeiculosDisponiveis(Scanner scanner, ListaLocacoes gerenciadorLocacoes, ListaVeiculos gerenciadorVeiculos) {
+        System.out.println("---- Veículos Disponíveis para Locação ----");
+        gerenciadorLocacoes.listarVeiculosDisponiveis(gerenciadorVeiculos);
 
         System.out.print("Escolha uma opção: ");
         int opcao = scanner.nextInt();
@@ -451,7 +450,7 @@ public class SistemaLocadora {
                 listarLocacoes(scanner, gerenciadorLocacoes);
                 break;
             case 4:
-                listarVeiculosDisponiveis(scanner, gerenciadorLocacoes);
+                listarVeiculosDisponiveis(scanner, gerenciadorLocacoes, gerenciadorVeiculos);
                 break;
             case 5:
                 System.out.println("Voltando ao Menu Principal.");
@@ -534,6 +533,9 @@ public class SistemaLocadora {
             System.out.println("Opção inválida.");
         }
     }
+
+    ListaVeiculos gerenciadorVeiculos = new ListaVeiculos(); // Inicializa a lista de veículos
+    // Adicione veículos à lista conforme necessário
 
     // Método para verificar veículos disponíveis para locação
     private static void listarVeiculosDisponiveis(Scanner scanner, ListaLocacoes gerenciadorLocacoes) {

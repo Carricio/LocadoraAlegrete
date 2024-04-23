@@ -42,11 +42,26 @@ class Veiculo {
 // Classe para gerenciar uma lista de veículos
 class ListaVeiculos {
     private Veiculo[] veiculos;
-    private int count;
+    int count;
 
     public ListaVeiculos(int tamanho) {
         this.veiculos = new Veiculo[tamanho];
         this.count = 0;
+    }
+
+    public ListaVeiculos() {
+
+    }
+
+    public int getCount() {
+        return count;
+    }
+
+    public Veiculo get(int index) {
+        if (index >= 0 && index < count) {
+            return veiculos[index];
+        }
+        return null;
     }
 
     public void adicionarVeiculo(Veiculo veiculo) {
@@ -97,5 +112,9 @@ class ListaVeiculos {
         for (int i = count - 1; i >= 0; i--) {
             System.out.println(veiculos[i]);
         }
+    }
+
+    public int count() {
+        return count;
     }
 }
