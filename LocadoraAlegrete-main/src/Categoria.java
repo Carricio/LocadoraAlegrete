@@ -1,6 +1,11 @@
+import java.io.*;
+
 class Categoria {
     private String nome;
     private int identificador;
+
+    public Categoria() {
+    }
 
     public Categoria(String nome, int identificador) {
         this.nome = nome;
@@ -17,6 +22,33 @@ class Categoria {
                 "nome='" + nome + '\'' +
                 ", identificador=" + identificador +
                 '}';
+    }
+    public BufferedReader mostraTabela() throws FileNotFoundException {
+        return new BufferedReader(new FileReader("C:\\Users\\Gabriel\\Documents\\LocadoraAlegrete-main\\LocadoraAlegrete-main\\Categorias.csv"));
+    }
+
+//    public BufferedWriter editarTabela() throws IOException {
+//        BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter("C:\\Users\\Gabriel\\Documents\\LocadoraAlegrete-main\\LocadoraAlegrete-main\\Categorias.csv"));
+//        String regexIdentificador = ";";
+//        return bufferedWriter.write("22".concat(regexIdentificador).concat("veiculo"));
+//    }
+
+
+    public static void main(String[] args) throws IOException {
+        Categoria categoria = new Categoria();
+        BufferedReader fileInputStream = categoria.mostraTabela();
+        String lines = fileInputStream.readLine();
+        String colunas = lines.replace(";", " | ");
+
+        System.out.println(colunas);
+    }
+    public void mostrarLinhas() throws IOException {
+        BufferedReader fileInputStream = mostraTabela();
+        String itens = "";
+        while((itens = fileInputStream.readLine()) != null) {
+            String itensLinhas = itens.replaceAll(";", " | ");
+            System.out.println(itensLinhas);
+        }
     }
 }
 
@@ -71,6 +103,7 @@ class ListaCategorias {
     public void listarCategorias() {
         for (int i = 0; i < count; i++) {
             System.out.println(categorias[i]);
+
         }
     }
 
