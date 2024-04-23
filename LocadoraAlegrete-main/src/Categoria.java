@@ -27,4 +27,4 @@ class Categoria {
                 '}';
     }
 }
-// o ema
+// o ema é lindo
