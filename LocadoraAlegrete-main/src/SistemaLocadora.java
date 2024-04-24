@@ -321,16 +321,9 @@ public class SistemaLocadora {
         System.out.println("---- Veículos Disponíveis para Locação ----");
         gerenciadorLocacoes.listarVeiculosDisponiveis(gerenciadorVeiculos);
 
-        System.out.print("Escolha uma opção: ");
-        int opcao = scanner.nextInt();
-
-        if (opcao == 1) {
             gerenciadorVeiculos.listarVeiculos();
-        } else if (opcao == 2) {
-            gerenciadorVeiculos.listarVeiculosReverso();
-        } else {
-            System.out.println("Opção inválida.");
-        }
+
+
     }
 
     // Método para gerenciar categorias

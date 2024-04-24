@@ -91,7 +91,6 @@ class ListaCategorias {
 
     public void listarCategorias() {
 
-
         try (BufferedReader bufferedReader = new BufferedReader(new FileReader("./LocadoraAlegrete-main/Categorias.csv"))) {
 
             String formatLines;

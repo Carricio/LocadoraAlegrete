@@ -32,6 +32,17 @@ class Veiculo {
         return marca;
     }
 
+    public int getAno() {
+        return ano;
+    }
+
+    public int getPotencia() {
+        return potencia;
+    }
+
+    public int getLugares() {
+        return lugares;
+    }
     public Categoria getCategoria() {
         return categoria;
     }
@@ -127,9 +138,23 @@ class ListaVeiculos {
         }
         for (int i = 0; i < count; i++) {
             Veiculo veiculo = veiculos[i];
-            String concat = String.valueOf(veiculo.getPlaca()).concat(" | ").concat(veiculo.getModelo().concat(veiculo.getMarca()));
+            Categoria categoria = veiculo.getCategoria();
+            String concat = String.valueOf(veiculo.getPlaca())
+                    .concat(" | ")
+                    .concat(veiculo.getModelo())
+                    .concat(" | ")
+                    .concat(veiculo.getMarca())
+                    .concat(" | ")
+                    .concat(String.valueOf(veiculo.getAno()))
+                    .concat(" | ")
+                    .concat(String.valueOf(veiculo.getPotencia()))
+                    .concat(" | ")
+                    .concat(String.valueOf(veiculo.getLugares()))
+                    .concat(" | ")
+                    .concat(String.valueOf(categoria.getIdentificador()));
+
             System.out.println(concat);
-            System.out.println(veiculos[i]);
+
         }
     }
 
