@@ -8,7 +8,7 @@ public class SistemaLocadora {
         ListaClientes gerenciadorClientes = new ListaClientes(100);
         ListaVeiculos gerenciadorVeiculos = new ListaVeiculos(100);
         ListaCategorias gerenciadorCategorias = new ListaCategorias(100);
-        ListaLocacoes gerenciadorLocacoes = new ListaLocacoes(100);
+        ListaLocacoes gerenciadorLocacoes = new ListaLocacoes(100, gerenciadorVeiculos);
 
         // Loop do menu
         while (true) {

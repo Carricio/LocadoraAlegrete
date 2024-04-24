@@ -1,4 +1,3 @@
-// Classe Locacao com atributos para cliente, veículo, datas e valor
 class Locacao {
     private Cliente cliente;
     private Veiculo veiculo;
@@ -50,10 +49,12 @@ class Locacao {
 class ListaLocacoes {
     private Locacao[] locacoes;
     private int count;
+    private ListaVeiculos veiculosDisponiveis;
 
-    public ListaLocacoes(int tamanho) {
+    public ListaLocacoes(int tamanho, ListaVeiculos gerenciadorVeiculos) {
         this.locacoes = new Locacao[tamanho];
         this.count = 0;
+        this.veiculosDisponiveis = gerenciadorVeiculos;
     }
 
     public int count() {
@@ -72,9 +73,11 @@ class ListaLocacoes {
         if (count < locacoes.length) {
             locacoes[count] = locacao;
             count++;
+            veiculosDisponiveis.excluirVeiculo(locacao.getVeiculo().getPlaca()); // Remover veículo da lista de disponíveis
         } else {
             expandirArray();
             locacoes[count++] = locacao;
+            veiculosDisponiveis.excluirVeiculo(locacao.getVeiculo().getPlaca()); // Remover veículo da lista de disponíveis
         }
     }
 
@@ -94,14 +97,16 @@ class ListaLocacoes {
         }
 
         if (index >= 0) {
+            // Adicionar veículo à lista de disponíveis
+            Veiculo veiculo = locacoes[index].getVeiculo();
+            veiculosDisponiveis.adicionarVeiculo(veiculo);
             for (int i = index; i < count - 1; i++) {
                 locacoes[i] = locacoes[i + 1];
             }
             locacoes[count - 1] = null;
             count--;
             System.out.println("Locação excluída com sucesso.");
-        } else {
-            System.out.println("Locação não encontrada.");
+
         }
     }
 
@@ -128,10 +133,10 @@ class ListaLocacoes {
 
     public void listarVeiculosDisponiveis(ListaVeiculos gerenciadorVeiculos) {
         System.out.println("Veículos disponíveis para locação:");
-        // Loop em todos os veículos
-        for (int i = 0; i < gerenciadorVeiculos.getCount(); i++) {
+        // Loop em todos os veículos disponíveis
+        for (int i = 0; i < veiculosDisponiveis.getCount(); i++) {
             boolean disponivel = true; // Assume que o veículo está disponível
-            Veiculo veiculo = gerenciadorVeiculos.get(i); // Obter o veículo da lista
+            Veiculo veiculo = veiculosDisponiveis.get(i); // Obter o veículo da lista
 
             // Verifica se o veículo está em alguma locação ativa
             for (int j = 0; j < this.count; j++) {
