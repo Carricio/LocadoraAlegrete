@@ -1,3 +1,6 @@
+import java.io.BufferedReader;
+import java.io.FileReader;
+
 class Veiculo {
     private String placa;
     private String modelo;
@@ -19,6 +22,14 @@ class Veiculo {
 
     public String getPlaca() {
         return placa;
+    }
+
+    public String getModelo() {
+        return modelo;
+    }
+
+    public String getMarca() {
+        return marca;
     }
 
     public Categoria getCategoria() {
@@ -103,7 +114,21 @@ class ListaVeiculos {
     }
 
     public void listarVeiculos() {
+        try (BufferedReader bufferedReader = new BufferedReader(new FileReader("./LocadoraAlegrete-main/Veiculos.csv"))) {
+
+            String formatLines;
+            while((formatLines = bufferedReader.readLine()) != null) {
+                String formatLines1 = formatLines.replaceAll(";", " | ");
+                System.out.println(formatLines1);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         for (int i = 0; i < count; i++) {
+            Veiculo veiculo = veiculos[i];
+            String concat = String.valueOf(veiculo.getPlaca()).concat(" | ").concat(veiculo.getModelo().concat(veiculo.getMarca()));
+            System.out.println(concat);
             System.out.println(veiculos[i]);
         }
     }

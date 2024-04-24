@@ -16,6 +16,10 @@ class Categoria {
         return identificador;
     }
 
+    public String getNome() {
+        return nome;
+    }
+
     @Override
     public String toString() {
         return "Categoria{" +
@@ -27,21 +31,6 @@ class Categoria {
         return new BufferedReader(new FileReader("C:\\Users\\Gabriel\\Documents\\LocadoraAlegrete-main\\LocadoraAlegrete-main\\Categorias.csv"));
     }
 
-//    public BufferedWriter editarTabela() throws IOException {
-//        BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter("C:\\Users\\Gabriel\\Documents\\LocadoraAlegrete-main\\LocadoraAlegrete-main\\Categorias.csv"));
-//        String regexIdentificador = ";";
-//        return bufferedWriter.write("22".concat(regexIdentificador).concat("veiculo"));
-//    }
-
-
-    public static void main(String[] args) throws IOException {
-        Categoria categoria = new Categoria();
-        BufferedReader fileInputStream = categoria.mostraTabela();
-        String lines = fileInputStream.readLine();
-        String colunas = lines.replace(";", " | ");
-
-        System.out.println(colunas);
-    }
     public void mostrarLinhas() throws IOException {
         BufferedReader fileInputStream = mostraTabela();
         String itens = "";
@@ -101,9 +90,23 @@ class ListaCategorias {
     }
 
     public void listarCategorias() {
-        for (int i = 0; i < count; i++) {
-            System.out.println(categorias[i]);
 
+
+        try (BufferedReader bufferedReader = new BufferedReader(new FileReader("./LocadoraAlegrete-main/Categorias.csv"))) {
+
+            String formatLines;
+            while((formatLines = bufferedReader.readLine()) != null) {
+                String formatLines1 = formatLines.replaceAll(";", " | ");
+                System.out.println(formatLines1);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        for (int i = 0; i < count; i++) {
+            Categoria categoria = categorias[i];
+            String concat = String.valueOf(categoria.getIdentificador()).concat(" | ").concat(categoria.getNome());
+            System.out.println(concat);
         }
     }
 
